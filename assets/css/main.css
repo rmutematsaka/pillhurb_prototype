@@ -1,0 +1,57 @@
+.tab-section-heading{
+	font-size: 18px;
+	font-weight: bold;
+	color: #aaa;
+}
+
+.nav-item{
+	border-bottom: 1px solid #dddddd;
+}
+
+.nav-item:hover{
+	background: #eee;
+}
+
+.stats:hover{
+	border: 1px solid #eee;
+	box-shadow: 1px 5px 8px #aaa;
+	border-radius: 10px;
+}
+
+.stats{
+	border: 1px solid #eee;
+	box-shadow: 1px 3px 5px #aaa;
+	border-radius: 10px;
+}
+
+.stats h4{
+	border-bottom: 1px solid #fff;
+}
+
+.card-body a{
+	color: #333;
+	text-decoration: none;
+}
+
+table tbody th, table.dataTable tbody td {
+  padding: 3px!important;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: 0.1rem 0.5rem!important;
+    font-size: .85rem!important;
+}
+
+.contact-info{
+	font-size: 11px;
+}
+
+.format_city{
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+a.nav-link.active{
+	background: #2f3391!important;
+	color: #fff!important;
+}

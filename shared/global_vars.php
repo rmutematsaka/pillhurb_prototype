@@ -1,0 +1,20 @@
+<?php
+	$app_name = 'Pillhurb Microfinance';
+	$app_address1 = '';
+	$app_address2 = '';
+	$app_address3 = 'Harare';
+	$app_contact = '+263772123456';
+	$timestamp = date('Y-m-d H:i:s');
+	$date_only = date('Y-m-d');
+	$time_only = date('H:i:s');
+	$transferCodeDate = date('md');
+	$user_ip = $_SERVER['REMOTE_ADDR'];
+	$active = 0;
+	$inactive = 1;
+	$open = 0;
+	$closed = 1;
+	$str_pad_len = 5;
+	$str_pad_char = 0;
+	$document = '-';
+	$percent = 100;
+	$undefined = "0000-00-00 00:00:00";

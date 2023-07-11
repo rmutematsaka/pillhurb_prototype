@@ -1,0 +1,29 @@
+.bg-dark{
+	background: #2f3391!important;
+}
+
+.sidebar .nav-link {
+    color: #2f3391!important;
+}
+
+.btn-primary{
+	background: #7fbd47!important;
+}
+
+.btn-dark{
+	background: #2c2c6c!important;
+}
+
+.btn-faded{
+	background: #889994!important;
+	color: #fff!important;
+}
+
+.btn-greyish{
+	background: #747cb4!important;
+	color: #fff!important;
+}
+
+.btn-light{
+	background: #d8e7cf!important;
+}
