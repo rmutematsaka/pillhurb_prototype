@@ -22,10 +22,10 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Customer Details
+        Customer
       </button>
     </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <div class="table-responsive">
 				<table class="table table-responsive table-condensed table-bordered table-hover">
@@ -36,6 +36,7 @@
 					foreach($customer as $key => $value){
 					?>
 					<input type="hidden" name="customer_code" value="<?php echo $value["customer_code"];?>"/>
+					<input type="hidden" name="created_by" value="<?php echo $session_user;?>"/>
 					<tr>
 						<th width="20%">Name</th>
 						<td><?php echo $value['customer_name']. ' ' . $value['customer_surname'];?></td>
@@ -62,13 +63,13 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Next of Kin Details
+        Next of Kin
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
 	  <div class="my-2">
-	  <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropCollateral"><i class="bi bi-tag"></i> Assign</button>
+	  <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropNoK"><i class="bi bi-tag"></i> Assign</button>
 	  <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropAddNoK"><i class="bi bi-person-add"></i> Register</button>
 	  </div>
 	  
@@ -78,13 +79,34 @@
 	  
     </div>
   </div>
+  </div>
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Loan Details
+        Attach Collateral
       </button>
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+	  <div class="my-2">
+	  <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropCollateral"><i class="bi bi-tag"></i> Assign</button>
+	  <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropAddCollateral"><i class="bi bi-person-add"></i> Register</button>
+	  </div>
+	  
+	<?php
+		require_once(PROJECT_PATH.'/controllers/collateral_controller.php');
+	?>
+	  
+    </div>
+  </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingFour">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        Loan Details
+      </button>
+    </h2>
+    <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
       <div class="accordion-body">
 	  <div class="my-2">
 		<div class="row">
@@ -176,7 +198,7 @@
 		</form>		
   </div>
 <?php include(SHARED_PATH.'/footer.php');?>
-<!-- Modal Assign Receiver -->
+<!-- Modal Assign Next of Kin -->
 <div class="modal fade" id="staticBackdropNoK" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
   <form action="" method="post">
@@ -204,7 +226,7 @@
   </div>
 </div>
 
-<!-- Modal Add Customer -->
+<!-- Modal Add Next of Kin -->
 <div class="modal fade" id="staticBackdropAddNoK" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
   <form action="" method="post">
@@ -296,6 +318,35 @@
 		<div class="col">
 			<div class="row">
 				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
+					<input type="text" name="chassis_serial" class="form-control" id="" placeholder="Chassis/Serial">
+					<label for="chassis_serial">Chassis/Serial:</label>
+				</div>
+			</div>
+		</div>		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Close</button>
+        <button type="submit" name="assign_collateral" class="btn btn-dark"><i class="bi bi-save"></i> Apply</button>
+      </div>
+  </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Assign Collateral -->
+<div class="modal fade" id="staticBackdropCollateral" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+  <form action="" method="post">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropUserLabel"><i class="bi bi-person-add"></i> Assign Collateral</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+		<div class="col">
+			<div class="row">
+				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
 					<input type="text" name="nok_nat_id" class="form-control" id="" placeholder="Receiver National ID...">
 					<label for="">Serial:</label>
 				</div>
@@ -311,82 +362,5 @@
   </div>
 </div>
 
-<!-- Modal Add Customer -->
-<div class="modal fade" id="staticBackdropAddCollateral" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-  <form action="" method="post">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropUserLabel"><i class="bi bi-person-add"></i> Add Collateral</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-		<div class="col">
-			<div class="row">
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_name" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">Name(s):</label>
-				</div>
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_surname" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">Surname:</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_nat_id" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">National ID/Passport:</label>
-				</div>
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_address1" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">Address:</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_address2" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">Suburb:</label>
-				</div>
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_address3" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">City:</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_phone" class="form-control" id="floatingAmountSold" placeholder="Name" required>
-					<label for="floatingAmountSold">Phone:</label>
-				</div>
-				<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-					<input type="text" name = "nok_email" class="form-control" id="floatingAmountSold" placeholder="Name">
-					<label for="floatingAmountSold">Email:</label>
-				</div>
-			</div>
-			<div class="row">
-			<div class="form-floating col mb-3 mt-3 ml-auto gx-1">
-				 <select name="nok_country" class="form-control" required>
-					<option hidden selected>--Select Country--</option>
-					<?php 
-						$data = ["country_status"=>$active];
-						$countries = select_all('country',$data);
-						foreach($countries as $key=>$value){
-					?>
-					<option value="<?php echo $value['country_id'];?>"><?php echo $value['country_name'];?></option>
-					<?php
-						}
-					?>
-				 </select>
-				<label for="floatingAmountPaid">Country:</label>
-			</div>
-			</div>
-		</div>		
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle"></i> Close</button>
-        <button type="submit" name="add_nok" class="btn btn-dark"><i class="bi bi-save"></i> Apply</button>
-      </div>
-  </form>
-    </div>
-  </div>
-</div>
+
 

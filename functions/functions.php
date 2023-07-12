@@ -104,6 +104,20 @@ function create_code($table){
 	return $empcode;
 }
 
+
+function create_reference(){
+	$reference = mt_rand(1,99999999);
+	$i= 1;
+	while($i==1){
+		$check = select_one('loan_list',["reference"=>$reference]);
+		if($check > 0){
+			$reference = mt_rand(1,99999999);
+		}else{
+			$i = 0;
+		}
+	}
+	return $reference;
+}
 function strip_timestamp($timestamp){
 	$dateOnly = substr($timestamp,0,10);
 	return $dateOnly;
@@ -299,6 +313,42 @@ function loan_status($value){
 		break;
 		case 4:
 			$status = "<span class='badge bg-danger'>Denied</span>";
+		break;
+	}
+	return $status;
+}
+
+
+function collateral_category($value){
+	$category = '';
+	switch($value){
+		case 1:
+			$category = "Property";
+		break;
+		case 2:
+			$category = "Vehicles";
+		break;
+		case 3:
+			$category = "Gadgets";
+		break;
+	}
+	return $category;
+}
+
+function show_status($value){
+	$status = '';
+	switch($value){
+		case 0:
+			$status = "<span class='badge bg-primary'>Unassigned</span>";
+		break;
+		case 1:
+			$status = "<span class='badge bg-secondary'>Active</span>";
+		break;
+		case 2:
+			$status = "<span class='badge bg-dark'>Inactive</span>";
+		break;
+		case 2:
+			$status = "<span class='badge bg-danger'>Disposed</span>";
 		break;
 	}
 	return $status;

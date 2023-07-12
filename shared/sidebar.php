@@ -54,6 +54,12 @@
             </a>
           </li>
           <li class="nav-item my-1">
+            <a class="nav-link" href="<?php echo url_for('/app/app_loans/collateral.php');?>">
+              <i class="bi bi-boxes"></i> 
+              Collateral
+            </a>
+          </li>
+          <li class="nav-item my-1">
             <a class="nav-link" href="<?php echo url_for('/app/app_loans/customers.php');?>">
               <i class="bi bi-person-vcard"></i> 
               Customers

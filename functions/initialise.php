@@ -11,13 +11,11 @@ define("ADMIN",1);
 define("AGENT",2);
 define("ACCOUNTANT",3);
 
-//Get root paths for urls and links
+//Get root paths for urls and linksc
 $script_name = $_SERVER['SCRIPT_NAME'];
-$public_end = strpos($script_name,'/')+8;
+$public_end = strpos($script_name,'/')+9;
 $doc_root = substr($_SERVER['SCRIPT_NAME'],0,$public_end);
 define("WWW_ROOT",$doc_root);
 
 require_once(SHARED_PATH.'global_vars.php');
 require_once('functions.php');
-
-?>

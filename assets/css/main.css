@@ -55,3 +55,11 @@ a.nav-link.active{
 	background: #2f3391!important;
 	color: #fff!important;
 }
+
+.group-td{
+	font-size: 12px;
+}
+
+.accordion-button{
+	background: #e7f1ff!important;
+}

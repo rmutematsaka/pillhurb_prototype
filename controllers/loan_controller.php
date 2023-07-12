@@ -46,29 +46,16 @@ if(isset($_GET['d'])){
 	
 }
 
-function create_reference(){
-	$reference = mt_rand(1,99999999);
-	$i= 1;
-	while($i==1){
-		$check = select_one('loan_list',["reference"=>$reference]);
-		if($check > 0){
-			$reference = mt_rand(1,99999999);
-		}else{
-			$i = 0;
-		}
-	}
-	return $reference;
-}
-
-
 if(isset($_POST['create_loan'])){
 	unset($_POST['create_loan']);
 	$_POST['date_created'] = $timestamp;
 	$_POST['status'] = $active;
-	$_POST['reference'] = create_reference();
+	//$_POST['reference'] = create_reference();
+	$_POST['loan_list_code'] = "PH_".create_code('loan_list');
 	$data = $_POST;
-	if(create('loan_list',$data)){
-		echo "<div class='alert alert-info text-center'>Loan created successfully</div>";
+	if($id=create('loan_list',$data)){
+		header('location: '.url_for('receipts/rcpt_new_loan.php?rcpt='.$id));
+		//echo "<div class='alert alert-info text-center'>Loan created successfully</div>";
 	}else echo "<div class='alert alert-warning text-center'>Loan could not be created</div>";
 }
 

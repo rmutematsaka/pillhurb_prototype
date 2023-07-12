@@ -36,7 +36,7 @@
 						?>
 						<tr>
 							<td><?php echo $i;?></td>
-							<td><?php echo $loan['reference'];?></td>
+							<td><?php echo $loan['loan_list_code'];?></td>
 							<td><?php echo $loan['customer_name']." ".$loan['customer_surname'];?></td>
 							<td class="text-end"><?php echo "$".number_format($loan['loan_amount'],2);?></td>
 							<td><?php echo $loan['loan_plan']." months";?></td>

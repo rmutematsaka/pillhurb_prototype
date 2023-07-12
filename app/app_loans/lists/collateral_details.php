@@ -1,24 +1,24 @@
 <div class="table-responsive">
 	<table class="table table-responsive table-condensed table-bordered table-hover">
+		<thead>
+			<th>Category</th>
+			<th>Item</th>
+			<th>Make</th>
+			<th>Serial</th>
+			<th>Market Value</th>
+			<th>Forced Value</th>
+		</thead>
 		<tbody>
 			<?php
-			foreach($nok as $key=>$value){ ?>
-				<input type="hidden" name="nok_code" value="<?php echo $value["nok_code"];?>"/>
+			foreach($collateral as $key=>$value){ ?>
+				<input type="hidden" name="collateral_code" value="<?php echo $value["collateral_code"];?>"/>
 				<tr>
-					<th width="20%">Name</th>
-					<td><?php echo $value["nok_name"].' '.$value["nok_surname"];?></td>
-				</tr>
-				<tr>
-					<th width="20%">nok ID</th>
-					<td><?php echo $value["nok_code"];?></td>
-				</tr>
-				<tr>
-					<th width="20%">National ID No</th>
-					<td><?php echo $value["nok_nat_id"];?></td>
-				</tr>
-				<tr>
-					<th width="20%">Address</th>
-					<td><?php echo $value['nok_address1'].', '.$value['nok_address2'].', '.$value['nok_address3'].', '.$value['nok_country'];?></td>
+					<td><?php echo collateral_category($value["category"]);?></td>
+					<td><?php echo $value['type']."<br/>"; ?></td>
+					<td><?php echo $value['brand']." ".$value['make_model']." ".$value['reg_no']; ?></td>
+					<td><?php echo $value['chassis_serial']; ?></td>
+					<td><?php echo $value['market_value']; ?></td>
+					<td><?php echo $value['forced_sale_value']; ?></td>
 				</tr>
 			<?php	
 			}
