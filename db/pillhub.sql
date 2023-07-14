@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 11, 2023 at 12:29 PM
+-- Generation Time: Jul 13, 2023 at 08:46 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.4.19
 
@@ -68,6 +68,59 @@ CREATE TABLE `branch_type` (
 INSERT INTO `branch_type` (`branch_type_id`, `branch_type_code`, `branch_type_name`, `branch_type_description`) VALUES
 (1, 'BRT_00001', 'Headquarters', 'Headquarters office'),
 (2, 'BRT_00002', 'Sub Agent', 'Sub agent');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `category_code` varchar(10) NOT NULL,
+  `category_name` varchar(50) NOT NULL,
+  `category_description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category_code`, `category_name`, `category_description`) VALUES
+(1, 'CAT_00001', 'Property', 'Houses, stands, buildings'),
+(2, 'CAT_00002', 'Vehicles', 'Cars, Trucks, Motorbikes'),
+(3, 'CAT_00003', 'Gadgets', 'Laptops, phones');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `collateral`
+--
+
+CREATE TABLE `collateral` (
+  `id` int(11) NOT NULL,
+  `collateral_code` varchar(10) NOT NULL,
+  `category` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `color` varchar(50) NOT NULL,
+  `brand` varchar(50) NOT NULL,
+  `make_model` varchar(50) NOT NULL,
+  `chassis_serial` varchar(20) NOT NULL,
+  `reg_no` varchar(20) NOT NULL,
+  `market_value` decimal(10,2) NOT NULL,
+  `forced_sale_value` decimal(10,2) NOT NULL,
+  `collateral_created` datetime NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `collateral`
+--
+
+INSERT INTO `collateral` (`id`, `collateral_code`, `category`, `type`, `color`, `brand`, `make_model`, `chassis_serial`, `reg_no`, `market_value`, `forced_sale_value`, `collateral_created`, `status`) VALUES
+(1, 'CLT_00001', 3, 'Laptop', 'Silver', 'HP', 'Probook 450 G9', '123456', '', '300.00', '200.00', '2023-07-12 17:08:35', 0),
+(2, 'CLT_00002', 3, 'Smart Phone', 'Black', 'Apple', 'iPhone 14', '654321', '', '300.00', '200.00', '2023-07-12 17:10:04', 0),
+(3, 'CLT_00003', 2, 'Sedan', 'Silver', 'Mercedes Benz', 'C180', '1212121212', 'ABC1234', '5000.00', '3000.00', '2023-07-12 17:10:21', 0);
 
 -- --------------------------------------------------------
 
@@ -494,7 +547,7 @@ CREATE TABLE `forex_sale` (
 
 CREATE TABLE `loan_list` (
   `id` int(30) NOT NULL,
-  `reference` varchar(10) NOT NULL,
+  `loan_list_code` varchar(10) NOT NULL,
   `loan_type` int(30) NOT NULL,
   `customer_code` varchar(20) NOT NULL,
   `nok_code` varchar(20) NOT NULL,
@@ -505,17 +558,19 @@ CREATE TABLE `loan_list` (
   `loan_penalty_amount` decimal(10,2) NOT NULL,
   `loan_plan` int(30) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0= request, 1= confirmed,2=released,3=completed,4=denied\r\n',
-  `date_released` datetime NOT NULL,
-  `date_created` datetime NOT NULL
+  `created_by` varchar(50) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_released` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `loan_list`
 --
 
-INSERT INTO `loan_list` (`id`, `reference`, `loan_type`, `customer_code`, `nok_code`, `loan_purpose`, `loan_amount`, `loan_repayment_total`, `loan_repayment_amount`, `loan_penalty_amount`, `loan_plan`, `status`, `date_released`, `date_created`) VALUES
-(1, '73152671', 1, 'CST_00001', 'NOK_00001', 'Personal loan text', '2000.00', '2400.00', '400.00', '20.00', 6, 2, '2023-07-10 20:34:20', '2023-07-08 12:13:58'),
-(2, '1997045', 1, 'CST_00001', 'NOK_00001', 'Personal loan', '2000.00', '2400.00', '800.00', '40.00', 3, 0, '0000-00-00 00:00:00', '2023-07-10 20:26:31');
+INSERT INTO `loan_list` (`id`, `loan_list_code`, `loan_type`, `customer_code`, `nok_code`, `loan_purpose`, `loan_amount`, `loan_repayment_total`, `loan_repayment_amount`, `loan_penalty_amount`, `loan_plan`, `status`, `created_by`, `date_created`, `date_released`) VALUES
+(1, 'PH_00001', 1, 'CST_00001', 'NOK_00001', '5hgvk', '2000.00', '2400.00', '400.00', '20.00', 6, 0, 'admin', '2023-07-11 22:01:00', '0000-00-00 00:00:00'),
+(2, 'PH_00002', 1, 'CST_00002', 'NOK_00001', 'loan', '4000.00', '4800.00', '4800.00', '240.00', 1, 0, 'admin', '2023-07-12 11:03:11', '0000-00-00 00:00:00'),
+(3, 'PH_00003', 1, 'CST_00002', 'NOK_00001', 'Loan', '5000.00', '6000.00', '250.00', '12.50', 24, 0, 'admin', '2023-07-12 19:03:36', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -788,6 +843,20 @@ ALTER TABLE `branch_type`
   ADD UNIQUE KEY `branch_type_code` (`branch_type_code`);
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `collateral`
+--
+ALTER TABLE `collateral`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chassis_serial` (`chassis_serial`),
+  ADD UNIQUE KEY `collateral_code` (`collateral_code`);
+
+--
 -- Indexes for table `config`
 --
 ALTER TABLE `config`
@@ -932,6 +1001,18 @@ ALTER TABLE `branch_type`
   MODIFY `branch_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `collateral`
+--
+ALTER TABLE `collateral`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `config`
 --
 ALTER TABLE `config`
@@ -977,7 +1058,7 @@ ALTER TABLE `forex_sale`
 -- AUTO_INCREMENT for table `loan_list`
 --
 ALTER TABLE `loan_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `loan_plan`
